@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { PokeService } from 'src/app/services/poke.service';
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.css']
+  styleUrls: ['./grid.component.css'],
 })
-export class GridComponent implements OnInit {
+export class GridComponent {
+  pokeList: any[] = []
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private pokeService: PokeService) {
+    pokeService.getList().subscribe((res: any) => {
+      this.pokeList = res.results;
+    });
   }
-
 }
