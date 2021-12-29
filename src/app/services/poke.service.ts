@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PokeService {
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  getList() {
+    return this.http.get(
+      'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
+    );
+  }
 }
