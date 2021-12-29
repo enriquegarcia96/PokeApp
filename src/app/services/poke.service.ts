@@ -8,7 +8,11 @@ export class PokeService {
 
   getList() {
     return this.http.get(
-      'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
+      'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=8'
     );
+  }
+
+  getPokeData(name: string) {
+    return this.http.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
   }
 }
