@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PokeService } from 'src/app/services/poke.service';
 
 @Component({
   selector: 'app-card',
@@ -8,8 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CardComponent implements OnInit {
   @Input()
   info: any;
+  url: string = ''; // imagenes de los pokemones
 
-  constructor() {}
+  constructor(private pokeService: PokeService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.pokeService.getPokeData(this.info.name).subscribe((res: any) => {
+      this.url = res.sprites.front_default;
+    });
+  }
 }

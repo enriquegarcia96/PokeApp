@@ -4,11 +4,22 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class PokeService {
+  private baseURl: string = 'https://pokeapi.co/api/v2';
+
   constructor(private http: HttpClient) {}
 
-  getList() {
-    return this.http.get(
-      'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
-    );
+  //.- trae la lista .-//
+  getList(page: number = 0) {
+    return this.http.get(`${this.baseURl}/pokemon/`, {
+      params: {
+        offset: page,
+        limit: 8,
+      },
+    });
+  }
+
+  // .- trae las imagenes .-//
+  getPokeData(name: string) {
+    return this.http.get(`${this.baseURl}/pokemon/${name}`);
   }
 }
